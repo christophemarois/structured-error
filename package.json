@@ -25,9 +25,10 @@
   "scripts": {
     "build": "tsup",
     "prepare": "husky install",
-    "publish": "np",
-    "test": "tsc && vitest run && npm run test:types",
-    "test:types": "npm run build && tsd --typings dist/index.d.ts --files src/index.test-d.ts"
+    "test": "npm run test:tsc && npm run test:vitest && npm run test:tsd",
+    "test:tsc": "tsc --noEmit",
+    "test:tsd": "npm run build && tsd --typings dist/index.d.ts --files src/index.test-d.ts",
+    "test:vitest": "vitest run"
   },
   "lint-staged": {
     "package.json": [
@@ -43,7 +44,6 @@
     "format-package": "^7.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
-    "np": "^7.6.3",
     "prettier": "^2.8.2",
     "tsd": "^0.25.0",
     "tsup": "^6.5.0",

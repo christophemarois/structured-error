@@ -6,7 +6,7 @@ export function createStructuredError<
     Data extends Parameters<CodeDict[Code]>[0],
   > extends Error {
     constructor(public readonly code: Code, public readonly data: Data) {
-      super(codeDict[code](data))
+      super(codeDict[code]!(data))
       Object.setPrototypeOf(this, StructuredError.prototype)
 
       // Will appear in the stack trace. Defined this way because typescript
