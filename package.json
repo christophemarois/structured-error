@@ -24,10 +24,9 @@
   ],
   "scripts": {
     "build": "tsup",
-    "lint": "tsc",
     "prepare": "husky install",
     "publish": "np",
-    "test": "vitest run && npm run test:types",
+    "test": "tsc && vitest run && npm run test:types",
     "test:types": "npm run build && tsd --typings dist/index.d.ts --files src/index.test-d.ts"
   },
   "lint-staged": {
