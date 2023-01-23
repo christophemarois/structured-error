@@ -1,0 +1,52 @@
+{
+  "name": "structured-error",
+  "version": "0.1.0",
+  "description": "Type-safe error creator",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/christophemarois/structured-error.git"
+  },
+  "bugs": {
+    "url": "https://github.com/christophemarois/structured-error/issues"
+  },
+  "homepage": "https://github.com/christophemarois/structured-error#readme",
+  "author": "Christophe Marois <christophe@pathway.md>",
+  "keywords": [
+    "errors"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepare": "husky install",
+    "publish": "np",
+    "test": "vitest run && npm run test:types",
+    "test:types": "npm run build && tsd --typings dist/index.d.ts --files src/index.test-d.ts"
+  },
+  "lint-staged": {
+    "package.json": [
+      "format-package -w"
+    ],
+    "**/*.(md|ts|tsx|js|jsx)": [
+      "prettier --write"
+    ]
+  },
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "format-package": "^7.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "np": "^7.6.3",
+    "prettier": "^2.8.2",
+    "tsd": "^0.25.0",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.4",
+    "vitest": "^0.27.0"
+  }
+}
