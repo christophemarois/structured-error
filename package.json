@@ -16,7 +16,7 @@
     "errors"
   ],
   "main": "dist/index.js",
-  "module": "dist/esm/index.js",
+  "module": "dist/index.mjs",
   "files": [
     "dist",
     "README.md",
@@ -24,6 +24,7 @@
   ],
   "scripts": {
     "build": "tsup",
+    "lint": "tsc",
     "prepare": "husky install",
     "publish": "np",
     "test": "vitest run && npm run test:types",
@@ -39,6 +40,7 @@
   },
   "types": "dist/index.d.ts",
   "devDependencies": {
+    "@changesets/cli": "^2.26.0",
     "format-package": "^7.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
