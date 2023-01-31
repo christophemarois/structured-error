@@ -35,15 +35,23 @@ test('instance extends Error', () => {
   expect(new FormError('invalidEmail', 'a@a')).toBeInstanceOf(Error)
 })
 
-test('is has the correct properties', () => {
+test('instance has the correct properties', () => {
   const FormError = getTest()
 
-  const email = 'a@a'
-  const { message, code, data } = FormError.invalidEmail(email)
+  const causeA = Symbol()
 
-  expect({ message, code, data }).toStrictEqual({
+  const email = 'a@a'
+  const {
+    message,
+    code,
+    data,
+    cause: causeB,
+  } = FormError.invalidEmail(email, { cause: causeA })
+
+  expect({ message, code, data, causeB }).toStrictEqual({
     message: `Email ${email} is invalid`,
     code: 'invalidEmail',
     data: email,
+    causeB: causeA,
   })
 })

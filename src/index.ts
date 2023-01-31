@@ -5,8 +5,8 @@ export function createStructuredError<
     Code extends keyof CodeDict,
     Data extends Parameters<CodeDict[Code]>[0],
   > extends Error {
-    constructor(public readonly code: Code, public readonly data: Data) {
-      super(codeDict[code]!(data))
+    constructor(public code: Code, public data: Data, options?: ErrorOptions) {
+      super(codeDict[code]!(data), options)
       Object.setPrototypeOf(this, StructuredError.prototype)
 
       // Will appear in the stack trace. Defined this way because typescript
@@ -24,6 +24,7 @@ export function createStructuredError<
   type DynamicStaticProps = {
     [Code in keyof CodeDict]: (
       data: Parameters<CodeDict[Code]>[0],
+      options?: ErrorOptions,
     ) => InstanceType<
       typeof StructuredError<Code, Parameters<CodeDict[Code]>[0]>
     >
@@ -31,7 +32,8 @@ export function createStructuredError<
 
   // Then we patch them directly on the class constructor
   for (const code of StructuredError.codes) {
-    const instanciator = (data: unknown) => new StructuredError(code, data)
+    const instanciator = (data: unknown, options?: ErrorOptions) =>
+      new StructuredError(code, data, options)
     Object.defineProperty(StructuredError, code, { value: instanciator })
   }
 
