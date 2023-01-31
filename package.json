@@ -1,6 +1,6 @@
 {
   "name": "structured-error",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Type-safe error creator",
   "license": "MIT",
   "repository": {
